@@ -20,6 +20,7 @@ const logRequest = (method, route, status) =>
 	console.log(method, route, status);
 
 const server = http.createServer((req, res) => {
+<<<<<<< HEAD
 	const method = req.method;
 	const route = url.parse(req.url).pathname;
 	// this is sloppy, espcially with more assets, create a "router"
@@ -35,6 +36,23 @@ const server = http.createServer((req, res) => {
 	}
 	// most important part, send down the asset
 });
+=======
+  const method = req.method
+  const route = url.parse(req.url).pathname
+  // this is sloppy, especially with more assets, create a "router"
+  if (route === '/') {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    res.write(findAsset('index.html'))
+    logRequest(method, route, 200)
+    res.end()
+  } else {
+    // missing asset should not cause server crash
+    throw new Error('route not found')
+    res.end()
+  }
+  // most important part, send down the asset
+})
+>>>>>>> small typo in server.js
 
 server.listen(port, hostname, () => {
 	console.log(`Server running at http://${hostname}:${port}/`);
